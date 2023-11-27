@@ -75,12 +75,14 @@ class ZeroServer:
         func: Callable
             RPC function.
         """
+        # 验证传参
         self._verify_function_name(func)
-        type_util.verify_function_args(func)
-        type_util.verify_function_input_type(func)
-        type_util.verify_function_return(func)
-        type_util.verify_function_return_type(func)
+        type_util.verify_function_args(func)                # 验证函数参数
+        type_util.verify_function_input_type(func)          # 验证函数传参类型
+        type_util.verify_function_return(func)              # 验证函数返回值
+        type_util.verify_function_return_type(func)         # 验证函数返回类型
 
+        # 获取函数输入输出类型
         self._rpc_input_type_map[func.__name__] = type_util.get_function_input_class(
             func
         )
@@ -88,6 +90,7 @@ class ZeroServer:
             func
         )
 
+        # 注册函数
         self._rpc_router[func.__name__] = func
         return func
 

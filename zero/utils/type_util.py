@@ -53,7 +53,7 @@ msgspec_types: typing.List = [
 
 allowed_types = builtin_types + std_lib_types + typing_types
 
-
+# 验证函数参数是否只有一个， 并且是否有类型提示
 def verify_function_args(func: Callable) -> None:
     arg_count = func.__code__.co_argcount
     if arg_count < 1:
@@ -103,7 +103,7 @@ def get_function_return_class(func: Callable):
     types = get_type_hints(func)
     return types.get("return")
 
-
+# 验证函数输入类型
 def verify_function_input_type(func: Callable):
     input_type = get_function_input_class(func)
     if input_type in allowed_types:
